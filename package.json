@@ -1,0 +1,27 @@
+{
+  "name": "gamenightbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AFuxy/gamenightbot.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "AFuxy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AFuxy/gamenightbot/issues"
+  },
+  "homepage": "https://github.com/AFuxy/gamenightbot#readme",
+  "description": "",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security"
+  }
+}

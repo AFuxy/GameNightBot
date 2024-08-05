@@ -1,0 +1,5 @@
+{
+	"clientId": "discord-bot-application-id",
+	"guildId": "discord-guild-id",
+	"testing": true
+}
