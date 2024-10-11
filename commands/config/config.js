@@ -138,7 +138,7 @@ module.exports = {
                     .setDescription(`Command ${interaction.options.getString('command')} has been disabled`)
                 await interaction.reply({ embeds: [embed], ephemeral: true });
             } else {
-                serverConfig[serverid][interaction.options.getString('command')] = false;
+                serverConfig[serverid][interaction.options.getString('command')] = true;
                 fs.writeFileSync('./serverConfig.json', JSON.stringify(serverConfig));
                 const embed = new EmbedBuilder()
                     .setColor(0x0099FF)
