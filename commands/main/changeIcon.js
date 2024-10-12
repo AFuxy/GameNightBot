@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const fs = require('node:fs');
 
 
@@ -53,7 +54,7 @@ module.exports = {
                 let timeinanhourset = newtime + cooldown;
                 fs.writeFileSync('./interactionCooldown.json', JSON.stringify(interactionCooldown));
                 await interaction.guild.setIcon(icon.url);
-                await interaction.reply({ content: interaction.user.username + 'The server icon can be changed again <t:' + Math.round(timeinanhourset/1000) + ':R>', ephemeral: false, files: [icon] });
+                await interaction.reply({ content: interaction.user.username + ' The server icon can be changed again <t:' + Math.round(timeinanhourset/1000) + ':R>', ephemeral: false, files: [icon] });
             } catch (error) {
                 console.error(error);
                 if (interaction.replied || interaction.deferred) {
