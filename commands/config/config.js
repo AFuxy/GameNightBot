@@ -146,10 +146,14 @@ module.exports = {
                 await interaction.reply({ embeds: [embed], ephemeral: true });
             }
         } else if (subcommand === 'view') {
+            // get list of configs and display them in a field
+            const configs = Object.keys(serverConfig[serverid]);
             const embed = new EmbedBuilder()
                 .setColor(0x0099FF)
                 .setTitle('Current config is:')
-                .setDescription('```json\n' + JSON.stringify(serverConfig[serverid], null, 2)+'```');
+            for (let i = 0; i < configs.length; i++) {
+                embed.addFields({ name: configs[i].toString(), value: `\`${serverConfig[serverid][configs[i]].toString()}\``, inline: true });
+            }
             await interaction.reply({ embeds: [embed], ephemeral: true });
         }
     }
