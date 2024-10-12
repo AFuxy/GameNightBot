@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const fs = require('node:fs');
 
 function replaceAll(str, find, replace) {
@@ -14,6 +15,7 @@ module.exports = {
                 .setName('name')
                 .setDescription('Servers new name')
                 .setRequired(true)
+                .setMaxLength(100)
         ),
     async execute(interaction) {
         const name = interaction.options.getString('name');
@@ -62,6 +64,15 @@ module.exports = {
                 let timeinanhourset = newtime + cooldown;
                 fs.writeFileSync('./interactionCooldown.json', JSON.stringify(interactionCooldown));
                 let layoutFinal = replaceAll(layout, '{newname}', name)
+                // check length of layoutFinal and if it is greater than 100 characters, then give error message
+                if (layoutFinal.length > 100) {
+                    // give error message in embed
+                    const embed = new EmbedBuilder()
+                        .setColor(0x0099FF)
+                        .setDescription('The server name is too long. Please use a shorter name.')
+                    await interaction.reply({ embeds: [embed], ephemeral: true });
+                    return;
+                }
                 layoutFinal = replaceAll(layoutFinal, '{username}', interaction.user.username)
                 await interaction.guild.setName(layoutFinal);
                 await interaction.reply({ content: interaction.user.username + ' has changed the server name to **' + name + '**\nThe server name can be changed again <t:' + Math.round(timeinanhourset/1000) + ':R>', ephemeral: false });
