@@ -28,17 +28,18 @@ module.exports = {
             serverConfig[serverid] = {};
             fs.writeFileSync('./serverConfig.json', JSON.stringify(serverConfig));
         }
+
+        if(serverConfig[serverid]['changename'] == false) {
+            await interaction.reply({ content: 'This command is not enabled for this server.', ephemeral: true });
+            return;
+        }
+        
         // check if there is a role restriction on the server and only allow users if they have the role
         if (serverConfig[serverid]['commandRestrict'] || serverConfig[serverid]['commandRestrict'] != undefined) {
             if (!interaction.member.roles.cache.has(serverConfig[serverid]['commandRestrict'])) {
                 await interaction.reply({ content: 'You do not have the required role to use this command.', ephemeral: true });
                 return;
             }
-        }
-
-        if(serverConfig[serverid]['changename'] == false) {
-            await interaction.reply({ content: 'This command is not enabled for this server.', ephemeral: true });
-            return;
         }
 
         if(serverConfig[serverid]['cooldown'] == undefined) {
